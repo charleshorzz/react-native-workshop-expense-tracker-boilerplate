@@ -16,7 +16,7 @@
    npx create-expo-app@latest expenseTracker
    ```
 
-or clone this repo to get started
+or clone this repo to get started (Recommended, with preconfigured components)
 
 ```bash
   git clone https://github.com/charleshorzz/react-native-workshop-expense-tracker-boilerplate.git
