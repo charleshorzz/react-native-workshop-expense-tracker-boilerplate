@@ -14,6 +14,7 @@ const Card = () => {
         paddingHorizontal: 20,
         paddingVertical: 16,
         borderRadius: 16,
+        marginBottom: 12,
         gap: 24,
         backgroundColor:
           useThemeColor({}, "background") === "#fff" ? "#f5f5f5" : "#2a2a2a",
