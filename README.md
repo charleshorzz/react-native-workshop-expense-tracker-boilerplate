@@ -6,7 +6,7 @@
 
 - Can be downloaded in App Store or Google Play Store
 
-2. Node.js is installed
+2. [Node.js](https://nodejs.org/en/download/) is installed
 3. VS Code or other IDE is installed
 
 ## Before started
