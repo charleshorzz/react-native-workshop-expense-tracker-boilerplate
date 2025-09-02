@@ -2,7 +2,7 @@
 
 ## Pre-requisites
 
-1. You need to have Expo Go installed on your physical device![Expo Go](data:image/png;base64,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) 
+1. You need to have Expo Go installed on your physical device![Expo Go](https://i.postimg.cc/1RYC3Xn6/expo-img.png) 
 
 - Can be downloaded in App Store or Google Play Store
 
@@ -66,9 +66,11 @@ In the output, you'll find options to open the app in a
 4. Due to time constraint, we will run the expo application using Expo Go to save the set up time, if simulators are installed, they're welcomed to be used
 
 5. Scan the QR code using physical device, if the app is built on your device, you've passed the first checkpoint
-** Log in for Expo go is required for first time use
+***Log in for Expo go is required for first time use**
 
 ## Checkpoint 2: Set up
+
+✨ Tips: use `CTRL + P / Command + P` in Vs Code to find a file quickly
 
 2a. Change custom fonts
 
@@ -77,13 +79,13 @@ In the output, you'll find options to open the app in a
 
 To change the fonts in React Native
 
-In app/\_layout.tsx, change the fonts from SpaceMono to Saira
+In `app/\_layout.tsx`, change the fonts from SpaceMono to Saira
 
-```bash
+```markdown
   Saira: require("../assets/fonts/Saira-Regular.ttf"),
 ```
 
-Then, update in ThemedText.tsx, make sure every styles included fontFamily. For example,
+Then, update in `ThemedText.tsx`, make sure every styles included fontFamily. For example,
 
 ```bash
     default: {
@@ -104,7 +106,7 @@ Then, update in ThemedText.tsx, make sure every styles included fontFamily. For 
 - You can use preferred colour throughout the project
 - Or use the default colour (recommended as dark mode is supported)
 
-In Colors.ts,
+In `Colors.ts`,
 
 ```bash
 export const Colors = {
@@ -123,7 +125,7 @@ export const Colors = {
 
 2c. Refactor the Home Page
 
-Open index.tsx, remove all the code and paste the code below to start
+Open `index.tsx`, remove all the code and paste the code below to start
 
 ```bash
 import Card from "@/components/Card";
@@ -212,7 +214,7 @@ const styles = StyleSheet.create({
 
 3a. Animation with React Native Reanimated
 
-To play with the animation example, open HelloWave.tsx
+To play with the animation example, open `HelloWave.tsx`
 
 ```bash
 export function HelloWave() {
@@ -229,7 +231,7 @@ export function HelloWave() {
   }, [rotationAnimation]);
 ```
 
-To implement animation in HomeScreen, open index.tsx and add the animation function
+To implement animation in HomeScreen, open `index.tsx` and add the animation function
 
 ```bash
 // ============== ANIMATION ==============
@@ -370,7 +372,7 @@ npm install @apollo/client rxjs graphql
 npm install --save-dev @graphql-codegen/cli @graphql-codegen/typescript @graphql-codegen/typescript-operations @graphql-codegen/typescript-react-apollo @graphql-codegen/client-preset
 ```
 
-2. Set up Apollo client, create a new file called ApolloClient.ts at root
+2. Set up Apollo client, create a new file called `ApolloClient.ts` at root
 
 ```
 import { ApolloClient, HttpLink, InMemoryCache } from "@apollo/client";
@@ -383,7 +385,7 @@ const client = new ApolloClient({
 export default client;
 ```
 
-3. Wrap the application using ApolloProvider
+3. Wrap the application using ApolloProvider in `app/_layout.tsx`
 
 ```
 <ApolloProvider client={client}> // newly added
@@ -399,7 +401,7 @@ export default client;
 
 ## Checkpoint 5: Set up React Apollo Query
 
-1. Create a file called codegen.yml at root and paste the config below
+1. Create a file called `codegen.yml` at root and paste the config below
 
 ```
 overwrite: true
@@ -420,9 +422,9 @@ generates:
       apolloReactHooksImportFrom: "@apollo/client/react"
 ```
 
-2. Create a new folder called libs at root, under the libs folder, create a file called index.graphql
+2. Create a new folder called `libs` at root, under the `libs` folder, create a file called `index.graphql`
 
-3. Open package.json, add new command, generate:graphql as below
+3. Open `package.json`, add new command, `generate:graphql` as below
 
 ```
  "scripts": {
@@ -436,7 +438,7 @@ generates:
   },
 ```
 
-4. Inside the index.graphql file created just now, write the query, mutation and fragment required
+4. Inside the `index.graphql` file created just now, write the query, mutation and fragment required
 
 ```
 # ==========   Query   ==============
@@ -499,11 +501,11 @@ fragment OffsetPageInfo on OffsetPageInfo {
 npm run generate:graphql
 ```
 
-6. Notice that under the libs folder, graphql.ts will be auto-generated
+6. Notice that under the `libs` folder, `graphql.ts` will be auto-generated
 
 ## Checkpoint 6: Integrate GraphQL in home screen
 
-1. Open index.tsx, below is a simple example to get transactions
+1. Open `index.tsx`, below is a simple example to get transactions
 
 ```
 const { data, loading, refetch } = useGetTransactionsQuery({
@@ -538,7 +540,7 @@ const { data, loading, refetch } = useGetTransactionsQuery({
 });
 ```
 
-2.  I've provive a refined design below to be pasted into index.tsx to show how data fetched can be passed into frontend
+2.  I've provive a refined design below to be pasted into `index.tsx to show how data fetched can be passed into frontend
 
 ```
 import { Animated, StyleSheet, TouchableOpacity, View } from "react-native";
@@ -780,7 +782,7 @@ const result = await createOneTransaction({
 
 ## Extra: Implement Infinite Scroll for transactions, using ApolloClient Cache
 
-ApolloClient.ts
+`ApolloClient.ts`
 
 ```
 // src/ApolloClient.js
@@ -834,7 +836,7 @@ const client = new ApolloClient({
 export default client;
 ```
 
-Index.tsx
+`Index.tsx`
 
 ```
 import {
