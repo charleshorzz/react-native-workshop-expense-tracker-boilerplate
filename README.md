@@ -1,8 +1,9 @@
 # React Native Expense Tracker Application Workshop
 
 ## Pre-requisites
+![Expo Go](https://i.postimg.cc/1RYC3Xn6/expo-img.png) 
 
-1. You need to have Expo Go installed on your physical device![Expo Go](https://i.postimg.cc/1RYC3Xn6/expo-img.png) 
+1. You need to have Expo Go installed on your physical device
 
 - Can be downloaded in App Store or Google Play Store
 
