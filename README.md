@@ -1,6 +1,7 @@
 # React Native Expense Tracker Application Workshop
 
 ## Pre-requisites
+![Expo Go](https://i.postimg.cc/1RYC3Xn6/expo-img.png) 
 
 1. You need to have Expo Go installed on your physical device
 
@@ -18,16 +19,30 @@
 
 or clone this repo to get started (Recommended, with preconfigured components)
 
-```bash
-  git clone https://github.com/charleshorzz/react-native-workshop-expense-tracker-boilerplate.git
+#### Terminal Method
 ```
+mkdir react-native-workshop
+cd react-native-workshop
+git clone https://github.com/charleshorzz/react-native-workshop-expense-tracker-boilerplate.git
+```
+
+#### Visual Studio Code Method
+```
+1. Create a folder
+2. Open the folder in Visual Studio Code
+3. Open Terminal, select git bash
+4. Run the command below
+
+git clone https://github.com/charleshorzz/react-native-workshop-expense-tracker-boilerplate.git
+```
+
 
 ## Checkpoint 1: Get started
 
 1. Go into expenseTracker directory
 
    ```bash
-   cd expenseTracker
+   cd react-native-workshop-expense-tracker-boilerplate
    ```
 
 2. Install dependencies
@@ -52,8 +67,11 @@ In the output, you'll find options to open the app in a
 4. Due to time constraint, we will run the expo application using Expo Go to save the set up time, if simulators are installed, they're welcomed to be used
 
 5. Scan the QR code using physical device, if the app is built on your device, you've passed the first checkpoint
+***Log in for Expo go is required for first time use**
 
 ## Checkpoint 2: Set up
+
+✨ Tips: use `CTRL + P / Command + P` in Vs Code to find a file quickly
 
 2a. Change custom fonts
 
@@ -62,13 +80,13 @@ In the output, you'll find options to open the app in a
 
 To change the fonts in React Native
 
-In app/\_layout.tsx, change the fonts from SpaceMono to Saira
+In `app/\_layout.tsx`, change the fonts from SpaceMono to Saira
 
-```bash
+```markdown
   Saira: require("../assets/fonts/Saira-Regular.ttf"),
 ```
 
-Then, update in ThemedText.tsx, make sure every styles included fontFamily. For example,
+Then, update in `ThemedText.tsx`, make sure every styles included fontFamily. For example,
 
 ```bash
     default: {
@@ -89,7 +107,7 @@ Then, update in ThemedText.tsx, make sure every styles included fontFamily. For 
 - You can use preferred colour throughout the project
 - Or use the default colour (recommended as dark mode is supported)
 
-In Colors.ts,
+In `Colors.ts`,
 
 ```bash
 export const Colors = {
@@ -108,7 +126,7 @@ export const Colors = {
 
 2c. Refactor the Home Page
 
-Open index.tsx, remove all the code and paste the code below to start
+Open `index.tsx`, remove all the code and paste the code below to start
 
 ```bash
 import Card from "@/components/Card";
@@ -197,7 +215,7 @@ const styles = StyleSheet.create({
 
 3a. Animation with React Native Reanimated
 
-To play with the animation example, open HelloWave.tsx
+To play with the animation example, open `HelloWave.tsx`
 
 ```bash
 export function HelloWave() {
@@ -214,7 +232,7 @@ export function HelloWave() {
   }, [rotationAnimation]);
 ```
 
-To implement animation in HomeScreen, open index.tsx and add the animation function
+To implement animation in HomeScreen, open `index.tsx` and add the animation function
 
 ```bash
 // ============== ANIMATION ==============
@@ -355,7 +373,7 @@ npm install @apollo/client rxjs graphql
 npm install --save-dev @graphql-codegen/cli @graphql-codegen/typescript @graphql-codegen/typescript-operations @graphql-codegen/typescript-react-apollo @graphql-codegen/client-preset
 ```
 
-2. Set up Apollo client, create a new file called ApolloClient.ts at root
+2. Set up Apollo client, create a new file called `ApolloClient.ts` at root
 
 ```
 import { ApolloClient, HttpLink, InMemoryCache } from "@apollo/client";
@@ -368,7 +386,7 @@ const client = new ApolloClient({
 export default client;
 ```
 
-3. Wrap the application using ApolloProvider
+3. Wrap the application using ApolloProvider in `app/_layout.tsx`
 
 ```
 <ApolloProvider client={client}> // newly added
@@ -384,7 +402,7 @@ export default client;
 
 ## Checkpoint 5: Set up React Apollo Query
 
-1. Create a file called codegen.yml at root and paste the config below
+1. Create a file called `codegen.yml` at root and paste the config below
 
 ```
 overwrite: true
@@ -405,9 +423,9 @@ generates:
       apolloReactHooksImportFrom: "@apollo/client/react"
 ```
 
-2. Create a new folder called libs at root, under the libs folder, create a file called index.graphql
+2. Create a new folder called `libs` at root, under the `libs` folder, create a file called `index.graphql`
 
-3. Open package.json, add new command, generate:graphql as below
+3. Open `package.json`, add new command, `generate:graphql` as below
 
 ```
  "scripts": {
@@ -421,7 +439,7 @@ generates:
   },
 ```
 
-4. Inside the index.graphql file created just now, write the query, mutation and fragment required
+4. Inside the `index.graphql` file created just now, write the query, mutation and fragment required
 
 ```
 # ==========   Query   ==============
@@ -484,11 +502,11 @@ fragment OffsetPageInfo on OffsetPageInfo {
 npm run generate:graphql
 ```
 
-6. Notice that under the libs folder, graphql.ts will be auto-generated
+6. Notice that under the `libs` folder, `graphql.ts` will be auto-generated
 
 ## Checkpoint 6: Integrate GraphQL in home screen
 
-1. Open index.tsx, below is a simple example to get transactions
+1. Open `index.tsx`, below is a simple example to get transactions
 
 ```
 const { data, loading, refetch } = useGetTransactionsQuery({
@@ -523,7 +541,7 @@ const { data, loading, refetch } = useGetTransactionsQuery({
 });
 ```
 
-2.  I've provive a refined design below to be pasted into index.tsx to show how data fetched can be passed into frontend
+2.  I've provive a refined design below to be pasted into `index.tsx to show how data fetched can be passed into frontend
 
 ```
 import { Animated, StyleSheet, TouchableOpacity, View } from "react-native";
@@ -765,7 +783,7 @@ const result = await createOneTransaction({
 
 ## Extra: Implement Infinite Scroll for transactions, using ApolloClient Cache
 
-ApolloClient.ts
+`ApolloClient.ts`
 
 ```
 // src/ApolloClient.js
@@ -819,7 +837,7 @@ const client = new ApolloClient({
 export default client;
 ```
 
-Index.tsx
+`Index.tsx`
 
 ```
 import {
