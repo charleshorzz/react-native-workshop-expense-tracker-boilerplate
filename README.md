@@ -12,12 +12,12 @@
 
 ## Before started
 
-1. You can either run the command below to start your expo application
+1. You can either run the command below to start your new expo application
    ```bash
    npx create-expo-app@latest expenseTracker
    ```
 
-or clone this repo to get started (Recommended, with preconfigured components)
+or clone this repo to get started (Recommended, with preconfigured components and screen)
 
 #### Terminal Method
 ```
@@ -124,93 +124,6 @@ export const Colors = {
 };
 ```
 
-2c. Refactor the Home Page
-
-Open `index.tsx`, remove all the code and paste the code below to start
-
-```bash
-import Card from "@/components/Card";
-import { ThemedText } from "@/components/ThemedText";
-import { ThemedView } from "@/components/ThemedView";
-import { useThemeColor } from "@/hooks/useThemeColor";
-import Ionicons from "@expo/vector-icons/Ionicons";
-import { ScrollView, StyleSheet, View } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
-
-export default function HomeScreen() {
-  return (
-    <View style={{ flex: 1, backgroundColor: useThemeColor({}, "background") }}>
-      <SafeAreaView style={{ flex: 1 }}>
-        <ThemedView
-          style={{
-            flex: 1,
-            paddingHorizontal: 16,
-            paddingVertical: 8,
-            gap: 20,
-          }}
-        >
-          <View style={[styles.header]}>
-            <Text
-              style={{
-                fontSize: 16,
-                color: useThemeColor({}, "text"),
-              }}
-            >
-              Hi, Hacker
-            </Text>
-            <Ionicons
-              size={28}
-              name="add-circle-outline"
-              color={useThemeColor({}, "opposite")}
-            />
-          </View>
-          <ScrollView
-            contentContainerStyle={{ paddingTop: 40 }}
-            scrollEventThrottle={16}
-          >
-            <Card />
-            {/* Mock content */}
-            {Array.from({ length: 15 }).map((_, i) => (
-              <View key={i} style={styles.card}>
-                <ThemedText>Card {i + 1}</ThemedText>
-              </View>
-            ))}
-          </ScrollView>
-        </ThemedView>
-      </SafeAreaView>
-    </View>
-  );
-}
-
-const styles = StyleSheet.create({
-  header: {
-    position: "absolute",
-    top: 0,
-    left: 0,
-    right: 0,
-    height: 40,
-    paddingHorizontal: 16,
-    justifyContent: "space-between",
-    flexDirection: "row",
-    alignItems: "center",
-    zIndex: 10,
-  },
-  card: {
-    height: 120,
-    margin: 10,
-    borderRadius: 12,
-    justifyContent: "center",
-    alignItems: "center",
-    shadowColor: "#000",
-    shadowOpacity: 0.1,
-    shadowOffset: { width: 0, height: 2 },
-    shadowRadius: 4,
-    elevation: 3,
-  },
-});
-
-```
-
 ## Checkpoint 3: Design
 
 3a. Animation with React Native Reanimated
@@ -232,7 +145,7 @@ export function HelloWave() {
   }, [rotationAnimation]);
 ```
 
-To implement animation in HomeScreen, open `index.tsx` and add the animation function
+Animation is already added in HomeScreen, open `index.tsx` and play around the animation function
 
 ```bash
 // ============== ANIMATION ==============
@@ -260,57 +173,14 @@ To implement animation in HomeScreen, open `index.tsx` and add the animation fun
     extrapolate: "clamp",
   });
 ```
-
-Transform the View, Text and ScrollView into Animated components
-
-```bash
-<Animated.View
-style={[
-    styles.header,
-    {
-    backgroundColor: headerBgColor,
-    },
-]}
->
-<Animated.Text
-    style={{
-    opacity: textOpacity,
-    transform: [{ translateY: textTranslateY }],
-    fontWeight: "600",
-    fontSize: 16,
-    color: useThemeColor({}, "text"),
-    }}
->
-    Hi, Hacker
-</Animated.Text>
-<Ionicons
-    size={28}
-    name="add-circle-outline"
-    color={useThemeColor({}, "opposite")}
-/>
-</Animated.View>
-<Animated.ScrollView
-contentContainerStyle={{ paddingTop: 40 }}
-scrollEventThrottle={16}
-onScroll={Animated.event(
-    [{ nativeEvent: { contentOffset: { y: scrollY } } }],
-    { useNativeDriver: false }
-)}
->
-<Card />
-{/* Mock content */}
-{Array.from({ length: 15 }).map((_, i) => (
-    <View key={i} style={styles.card}>
-    <ThemedText>Card {i + 1}</ThemedText>
-    </View>
-))}
-</Animated.ScrollView>
-```
-
 ## Checkpoint 4: Set Up GraphQL
 
 GraphQL Endpoint
 
+```
+http://45.195.69.213:3333/graphiql
+```
+OR
 ```
 https://147d60b740bb.ngrok-free.app/graphql
 ```
@@ -363,6 +233,8 @@ query getTransaction {
 
 ```
 
+**Set up Apollo GraphQL in react native application**
+
 1. Install Packages
 
 ```
@@ -402,44 +274,9 @@ export default client;
 
 ## Checkpoint 5: Set up React Apollo Query
 
-1. Create a file called `codegen.yml` at root and paste the config below
+1. Notice that there is a folder called `libs` at root, under the `libs` folder, there is a file called `index.graphql`
 
-```
-overwrite: true
-schema: "https://147d60b740bb.ngrok-free.app/graphql"
-documents: "libs/**/*.graphql"
-generates:
-  libs/generated/graphql.ts:
-    plugins:
-      - typescript
-      - typescript-operations
-      - typescript-react-apollo
-    config:
-      withHooks: true
-      withComponent: false
-      withHOC: false
-      reactApolloVersion: 3
-      apolloReactCommonImportFrom: "@apollo/client"
-      apolloReactHooksImportFrom: "@apollo/client/react"
-```
-
-2. Create a new folder called `libs` at root, under the `libs` folder, create a file called `index.graphql`
-
-3. Open `package.json`, add new command, `generate:graphql` as below
-
-```
- "scripts": {
-    "start": "expo start",
-    "reset-project": "node ./scripts/reset-project.js",
-    "android": "expo start --android",
-    "ios": "expo start --ios",
-    "web": "expo start --web",
-    "lint": "expo lint",
-    "generate:graphql": "graphql-codegen --config codegen.yml" // newly added
-  },
-```
-
-4. Inside the `index.graphql` file created just now, write the query, mutation and fragment required
+2. Inside the `index.graphql` file, write the query, mutation and fragment as below if you want ur application to use
 
 ```
 # ==========   Query   ==============
@@ -496,13 +333,13 @@ fragment OffsetPageInfo on OffsetPageInfo {
 }
 ```
 
-5. Run the command below to generate types and react query for the graphql resolver wroted above
+3. Run the command below to generate types and react query for the graphql resolver wroted above
 
 ```
 npm run generate:graphql
 ```
 
-6. Notice that under the `libs` folder, `graphql.ts` will be auto-generated
+4. Notice that under the `libs` folder, `graphql.ts` will be auto-generated
 
 ## Checkpoint 6: Integrate GraphQL in home screen
 
@@ -1183,11 +1020,11 @@ If you wanna build a standalone application, without relying on Expo Go, you can
 It will return a eas link for you where you can install the APK in Android
 
 ```
-eas build --platform android
+eas build --platform android --profile production
 ```
 
 For IOS, you're required to have a paid Apple account to have a standalone application
 
 ```
-eas build --platform ios
+eas build --platform ios --profile production
 ```
