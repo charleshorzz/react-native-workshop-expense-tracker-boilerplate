@@ -1,64 +1,107 @@
-import { Image } from 'expo-image';
-import { Platform, StyleSheet } from 'react-native';
-
-import { HelloWave } from '@/components/HelloWave';
-import ParallaxScrollView from '@/components/ParallaxScrollView';
-import { ThemedText } from '@/components/ThemedText';
-import { ThemedView } from '@/components/ThemedView';
+import Card from "@/components/Card";
+import { ThemedText } from "@/components/ThemedText";
+import { ThemedView } from "@/components/ThemedView";
+import { useThemeColor } from "@/hooks/useThemeColor";
+import Ionicons from "@expo/vector-icons/Ionicons";
+import { useRef } from "react";
+import { Animated, StyleSheet, View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function HomeScreen() {
+  // ============== ANIMATION ==============
+  const scrollY = useRef(new Animated.Value(0)).current;
+  const isLightMode = useThemeColor({}, "background") === "#fff";
+
+  // Animate background from original color → transparent
+  const headerBgColor = scrollY.interpolate({
+    inputRange: [0, 250], // scroll distance
+    outputRange: isLightMode
+      ? ["rgba(255,255,255,1)", " rgba(255,255,255,0.75)"]
+      : ["rgba(21,23,24,1)", " rgba(21,23,24,0.85)"],
+    extrapolate: "clamp",
+  });
+
+  const textOpacity = scrollY.interpolate({
+    inputRange: [0, 100],
+    outputRange: [1, 0], // fully visible → invisible
+    extrapolate: "clamp",
+  });
+
+  const textTranslateY = scrollY.interpolate({
+    inputRange: [0, 100],
+    outputRange: [0, -20], // move slightly up while fading
+    extrapolate: "clamp",
+  });
+
   return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
-      headerImage={
-        <Image
-          source={require('@/assets/images/partial-react-logo.png')}
-          style={styles.reactLogo}
-        />
-      }>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Welcome!</ThemedText>
-        <HelloWave />
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 1: Try it</ThemedText>
-        <ThemedText>
-          Edit <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> to see changes.
-          Press{' '}
-          <ThemedText type="defaultSemiBold">
-            {Platform.select({
-              ios: 'cmd + d',
-              android: 'cmd + m',
-              web: 'F12',
-            })}
-          </ThemedText>{' '}
-          to open developer tools.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 2: Explore</ThemedText>
-        <ThemedText>
-          {`Tap the Explore tab to learn more about what's included in this starter app.`}
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 3: Get a fresh start</ThemedText>
-        <ThemedText>
-          {`When you're ready, run `}
-          <ThemedText type="defaultSemiBold">npm run reset-project</ThemedText> to get a fresh{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> directory. This will move the current{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> to{' '}
-          <ThemedText type="defaultSemiBold">app-example</ThemedText>.
-        </ThemedText>
-      </ThemedView>
-    </ParallaxScrollView>
+    <View style={{ flex: 1, backgroundColor: useThemeColor({}, "background") }}>
+      <SafeAreaView style={{ flex: 1 }}>
+        <ThemedView
+          style={{
+            flex: 1,
+            paddingHorizontal: 16,
+            paddingVertical: 8,
+            gap: 20,
+          }}
+        >
+          <Animated.View
+            style={[
+              styles.header,
+              {
+                backgroundColor: headerBgColor,
+              },
+            ]}
+          >
+            <Animated.Text
+              style={{
+                opacity: textOpacity,
+                transform: [{ translateY: textTranslateY }],
+                fontWeight: "600",
+                fontSize: 16,
+                color: useThemeColor({}, "text"),
+              }}
+            >
+              Hi, Hacker
+            </Animated.Text>
+            <Ionicons
+              size={28}
+              name="add-circle-outline"
+              color={useThemeColor({}, "opposite")}
+            />
+          </Animated.View>
+          <Animated.ScrollView
+            contentContainerStyle={{ paddingTop: 40 }}
+            scrollEventThrottle={16}
+            showsVerticalScrollIndicator={false}
+            onScroll={Animated.event(
+              [{ nativeEvent: { contentOffset: { y: scrollY } } }],
+              { useNativeDriver: false }
+            )}
+          >
+            <Card />
+            {/* Mock content */}
+            {Array.from({ length: 15 }).map((_, i) => (
+              <View
+                key={i}
+                style={[
+                  styles.card,
+                  { backgroundColor: isLightMode ? "#f5f5f5" : "#2a2a2a" },
+                ]}
+              >
+                <ThemedText>Card {i + 1}</ThemedText>
+              </View>
+            ))}
+          </Animated.ScrollView>
+        </ThemedView>
+      </SafeAreaView>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
   titleContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     gap: 8,
   },
   stepContainer: {
@@ -70,6 +113,30 @@ const styles = StyleSheet.create({
     width: 290,
     bottom: 0,
     left: 0,
-    position: 'absolute',
+    position: "absolute",
+  },
+  card: {
+    height: 120,
+    marginVertical: 10,
+    borderRadius: 12,
+    justifyContent: "center",
+    alignItems: "center",
+    shadowColor: "#000",
+    shadowOpacity: 0.1,
+    shadowOffset: { width: 0, height: 2 },
+    shadowRadius: 4,
+    elevation: 3,
+  },
+  header: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    right: 0,
+    height: 40,
+    paddingHorizontal: 16,
+    justifyContent: "space-between",
+    flexDirection: "row",
+    alignItems: "center",
+    zIndex: 10,
   },
 });
