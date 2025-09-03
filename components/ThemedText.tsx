@@ -50,52 +50,52 @@ const styles = StyleSheet.create({
   default: {
     fontSize: 14,
     lineHeight: 24,
-    fontFamily: "Saira",
+    fontFamily: "Saira", // add or update your font here
   },
   defaultSemiBold: {
     fontSize: 16,
     lineHeight: 24,
     fontWeight: "600",
-    fontFamily: "Saira",
+    fontFamily: "Saira", // add or update your font here
   },
   title: {
     fontSize: 32,
     fontWeight: "bold",
     lineHeight: 40,
-    fontFamily: "Saira",
+    fontFamily: "Saira", // add or update your font here
   },
   subtitle: {
     fontSize: 24,
     fontWeight: "bold",
-    fontFamily: "Saira",
+    fontFamily: "Saira", // add or update your font here
   },
   link: {
     lineHeight: 30,
     fontSize: 16,
     color: "#0a7ea4",
-    fontFamily: "Saira",
+    fontFamily: "Saira", // add or update your font here
   },
   cardText: {
     fontSize: 12,
     lineHeight: 16,
-    fontFamily: "Saira",
+    fontFamily: "Saira", // add or update your font here
   },
   cardSmallText: {
     fontSize: 10,
     fontWeight: "400",
     lineHeight: 15,
-    fontFamily: "Saira",
+    fontFamily: "Saira", // add or update your font here
   },
   cardTextSemiBold: {
     fontSize: 14,
     fontWeight: "600",
     lineHeight: 18,
-    fontFamily: "Saira",
+    fontFamily: "Saira", // add or update your font here
   },
   cardTextBold: {
     fontSize: 16,
     fontWeight: "bold",
     lineHeight: 20,
-    fontFamily: "Saira",
+    fontFamily: "Saira", // add or update your font here
   },
 });
