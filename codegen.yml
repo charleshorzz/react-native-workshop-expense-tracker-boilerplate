@@ -1,0 +1,16 @@
+overwrite: true
+schema: "https://147d60b740bb.ngrok-free.app/graphql"
+documents: "libs/**/*.graphql"
+generates:
+  libs/generated/graphql.ts:
+    plugins:
+      - typescript
+      - typescript-operations
+      - typescript-react-apollo
+    config:
+      withHooks: true
+      withComponent: false
+      withHOC: false
+      reactApolloVersion: 3
+      apolloReactCommonImportFrom: "@apollo/client"
+      apolloReactHooksImportFrom: "@apollo/client/react"
